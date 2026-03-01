@@ -11,7 +11,7 @@
   "include": ["./**/*.ts", "../pkg-a/**/*.ts", "../pkg-b/**/*.ts"],
   "tstl": {
     "luaTarget": "5.3",
-    "luaBundle": "dist/bundle.lua",
+    "luaBundle": "../../dist/bundle.lua",
     "luaBundleEntry": "./main.ts",
     "luaLibImport": "require",
     "sourceMapTraceback": true

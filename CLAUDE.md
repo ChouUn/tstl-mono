@@ -6,8 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 pnpm install          # Install dependencies
-pnpm build            # Build pkg-c → packages/pkg-c/dist/bundle.lua
-lua packages/pkg-c/dist/bundle.lua   # Run the output
+pnpm build            # Build pkg-c → dist/bundle.lua
+lua dist/bundle.lua   # Run the output
 pnpm -r run clean     # Remove all dist/ directories
 ```
 

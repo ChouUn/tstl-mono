@@ -25,8 +25,8 @@ pkg-c ──→ pkg-b ──→ pkg-a
 
 ```bash
 pnpm install
-pnpm build          # 构建 pkg-c → packages/pkg-c/dist/bundle.lua
-lua packages/pkg-c/dist/bundle.lua
+pnpm build          # 构建 pkg-c → dist/bundle.lua
+lua dist/bundle.lua
 ```
 
 ## 关键设计
