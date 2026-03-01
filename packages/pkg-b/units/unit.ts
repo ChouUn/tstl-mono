@@ -1,5 +1,4 @@
-import { Vec2, vec2 } from "pkg-a";
-import { formatHp } from "pkg-a";
+import { Vec2, vec2, formatHp } from "pkg-a";
 
 export interface Unit {
   name: string;
