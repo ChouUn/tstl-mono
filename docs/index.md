@@ -7,3 +7,4 @@
 
 ## 目录
 - [engine-api/](./engine-api/index.md) — 引擎 API 类型声明与验证方案
+- [tutorials/](./tutorials/index.md) — 工程接入与操作教程
