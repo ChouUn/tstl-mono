@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "pkg-a": "workspace:*",
-    "pkg-b": "workspace:*"
+    "pkg-b": "workspace:*",
+    "pkg-engine-api": "workspace:*"
   }
 }

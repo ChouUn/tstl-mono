@@ -18,6 +18,8 @@ importers:
         specifier: ^1.33.2
         version: 1.33.2(typescript@5.9.3)
 
+  packages/e2e-engine-api: {}
+
   packages/pkg-a: {}
 
   packages/pkg-b:
@@ -34,6 +36,11 @@ importers:
       pkg-b:
         specifier: workspace:*
         version: link:../pkg-b
+      pkg-engine-api:
+        specifier: workspace:*
+        version: link:../pkg-engine-api
+
+  packages/pkg-engine-api: {}
 
 packages:
 

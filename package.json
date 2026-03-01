@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "build": "pnpm --filter pkg-c run build",
-    "clean": "pnpm -r run clean"
+    "clean": "pnpm -r run clean",
+    "e2e:engine-api": "pnpm --filter e2e-engine-api run run"
   },
   "devDependencies": {
     "lua-types": "^2.13.1",
