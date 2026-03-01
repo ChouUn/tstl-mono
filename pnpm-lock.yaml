@@ -12,11 +12,11 @@ importers:
         specifier: ^2.13.1
         version: 2.13.1
       typescript:
-        specifier: ~5.6.0
-        version: 5.6.3
+        specifier: ~5.9.0
+        version: 5.9.3
       typescript-to-lua:
-        specifier: file:../TypeScriptToLua
-        version: file:../TypeScriptToLua(typescript@5.6.3)
+        specifier: ^1.33.2
+        version: 1.33.2(typescript@5.9.3)
 
   packages/pkg-a: {}
 
@@ -85,15 +85,15 @@ packages:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
     engines: {node: '>=6'}
 
-  typescript-to-lua@file:../TypeScriptToLua:
-    resolution: {directory: ../TypeScriptToLua, type: directory}
+  typescript-to-lua@1.33.2:
+    resolution: {integrity: sha512-A/o3JgPuKDn3f5nPOM8GiL1Eo5Ngw+wKGe0OxtWuwqU099ZKccpi9JG4Y3WQRHPpPkPmjD/eEQFo4UAehxO8DQ==}
     engines: {node: '>=16.10.0'}
     hasBin: true
     peerDependencies:
       typescript: 5.9.3
 
-  typescript@5.6.3:
-    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -136,13 +136,13 @@ snapshots:
 
   tapable@2.3.0: {}
 
-  typescript-to-lua@file:../TypeScriptToLua(typescript@5.6.3):
+  typescript-to-lua@1.33.2(typescript@5.9.3):
     dependencies:
       '@typescript-to-lua/language-extensions': 1.19.0
       enhanced-resolve: 5.8.2
       picomatch: 2.3.1
       resolve: 1.22.11
       source-map: 0.7.6
-      typescript: 5.6.3
+      typescript: 5.9.3
 
-  typescript@5.6.3: {}
+  typescript@5.9.3: {}
