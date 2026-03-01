@@ -1,0 +1,13 @@
+{
+  "name": "pkg-c",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tstl",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "pkg-a": "workspace:*",
+    "pkg-b": "workspace:*"
+  }
+}

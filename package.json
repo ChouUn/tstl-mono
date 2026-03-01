@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "pnpm --filter pkg-c run build",
+    "clean": "pnpm -r run clean"
+  },
+  "devDependencies": {
+    "lua-types": "^2.13.1",
+    "typescript": "~5.6.0",
+    "typescript-to-lua": "file:../TypeScriptToLua"
+  }
+}

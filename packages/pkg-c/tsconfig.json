@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "..",
+    "baseUrl": ".",
+    "paths": {
+      "pkg-a": ["../pkg-a/index"],
+      "pkg-b": ["../pkg-b/index"]
+    }
+  },
+  "include": ["./**/*.ts", "../pkg-a/**/*.ts", "../pkg-b/**/*.ts"],
+  "tstl": {
+    "luaTarget": "5.3",
+    "luaBundle": "dist/bundle.lua",
+    "luaBundleEntry": "./main.ts",
+    "luaLibImport": "require",
+    "sourceMapTraceback": true
+  }
+}

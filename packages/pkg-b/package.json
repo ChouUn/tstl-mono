@@ -1,0 +1,15 @@
+{
+  "name": "pkg-b",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./dist/index",
+  "types": "./dist/index.d.ts",
+  "files": ["dist/**/*.lua", "dist/**/*.d.ts"],
+  "scripts": {
+    "build": "tstl",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "pkg-a": "workspace:*"
+  }
+}

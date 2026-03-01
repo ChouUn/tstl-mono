@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist",
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "pkg-a": ["../pkg-a/index"]
+    }
+  },
+  "include": ["./**/*.ts", "../pkg-a/**/*.ts"]
+}
