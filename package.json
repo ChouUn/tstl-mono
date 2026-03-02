@@ -16,6 +16,6 @@
 		"typescript-to-lua": "^1.33.2"
 	},
 	"simple-git-hooks": {
-		"pre-commit": "pnpm exec biome check --staged"
+		"pre-commit": "pnpm exec biome check --staged --no-errors-on-unmatched"
 	}
 }

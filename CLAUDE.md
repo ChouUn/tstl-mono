@@ -13,13 +13,26 @@ pnpm -r run clean     # Remove all dist/ directories
 
 Only pkg-c has a meaningful build — pkg-a and pkg-b are never built independently.
 
+## Code Quality
+
+```bash
+pnpm check            # Biome: format + lint + import sorting (one command)
+pnpm format           # Biome: format only (--write)
+pnpm lint             # Biome: lint only
+```
+
+- **Biome 2.x** handles formatting, linting, and import sorting via `biome.json`
+- **simple-git-hooks** runs `biome check --staged` on every commit (pre-commit hook)
+
 ## Architecture
 
-This is a TSTL (TypeScriptToLua) monorepo demo targeting Lua 5.3 (Warcraft III). Three packages managed by pnpm workspace:
+This is a TSTL (TypeScriptToLua) monorepo demo targeting Lua 5.3 (Warcraft III). Five packages managed by pnpm workspace:
 
 - **pkg-a** — Base library (math utilities, logging, formatting)
 - **pkg-b** — Unit system (depends on pkg-a)
-- **pkg-c** — Main entry point (depends on pkg-a + pkg-b, produces single Lua bundle)
+- **pkg-c** — Main entry point (depends on pkg-a + pkg-b + pkg-engine-api, produces single Lua bundle)
+- **pkg-engine-api** — Engine API type declarations (pure `.d.ts`, global + module dual model)
+- **e2e-engine-api** — E2E tests for engine API (Lua stubs + bundle execution)
 
 ### Source Compilation Model
 
@@ -35,7 +48,6 @@ pkg-c compiles all three packages' TypeScript source directly into one `bundle.l
 - `luaBundle` + `luaBundleEntry` in pkg-c's tsconfig produce a single-file Lua bundle
 - `luaLibImport: "require"` — TSTL's runtime library is loaded via require, not inlined
 - `lua-types/5.3` provides type definitions for Lua globals (`math`, `print`, `string`, etc.)
-- TSTL is linked locally via `file:../TypeScriptToLua` — the source lives at `/mnt/e/wc3-repos/TypeScriptToLua`
 - Use `math.sqrt()` not `Math.sqrt()` — code targets Lua runtime, not JavaScript
 
 ### Adding a New Package
