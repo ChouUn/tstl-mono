@@ -33,7 +33,7 @@ e2e-engine-api ──→ dist/bundle.lua (构建产物)
 ```bash
 pnpm install
 pnpm build            # 构建 pkg-c → dist/bundle.lua
-lua dist/bundle.lua   # 运行
+pnpm e2e:engine-api   # 通过 Lua stubs 运行 bundle
 ```
 
 ## 代码质量

@@ -7,11 +7,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 pnpm install          # Install dependencies
 pnpm build            # Build pkg-c → dist/bundle.lua
-lua dist/bundle.lua   # Run the output
+pnpm e2e:engine-api   # Run bundle with engine API stubs
 pnpm -r run clean     # Remove all dist/ directories
 ```
 
-Only pkg-c has a meaningful build — pkg-a and pkg-b are never built independently.
+`lua dist/bundle.lua` does NOT work standalone — main.ts imports from `pkg-engine-api`, which requires Lua stubs. Use `pnpm e2e:engine-api` instead.
 
 ## Code Quality
 
