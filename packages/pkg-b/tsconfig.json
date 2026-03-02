@@ -1,11 +1,11 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "pkg-a": ["../pkg-a/index"]
-    }
-  },
-  "include": ["./**/*.ts", "../pkg-a/**/*.ts"]
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"noEmit": true,
+		"baseUrl": ".",
+		"paths": {
+			"pkg-a": ["../pkg-a/index"]
+		}
+	},
+	"include": ["./**/*.ts", "../pkg-a/**/*.ts"]
 }

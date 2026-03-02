@@ -3,6 +3,6 @@
 export {};
 
 declare global {
-  function engineGlobalPrint(message: string): void;
-  function engineGlobalGetBuild(): string;
+	function engineGlobalPrint(message: string): void;
+	function engineGlobalGetBuild(): string;
 }

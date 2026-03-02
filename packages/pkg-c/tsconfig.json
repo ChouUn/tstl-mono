@@ -1,21 +1,26 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "rootDir": "..",
-    "baseUrl": ".",
-    "paths": {
-      "pkg-a": ["../pkg-a/index"],
-      "pkg-b": ["../pkg-b/index"],
-      "pkg-engine-api": ["../pkg-engine-api/index"]
-    }
-  },
-  "include": ["./**/*.ts", "../pkg-a/**/*.ts", "../pkg-b/**/*.ts", "../pkg-engine-api/**/*.d.ts"],
-  "tstl": {
-    "luaTarget": "5.3",
-    "luaBundle": "../../dist/bundle.lua",
-    "luaBundleEntry": "./main.ts",
-    "luaLibImport": "require",
-    "sourceMapTraceback": true,
-    "noResolvePaths": ["pkg-engine-api"]
-  }
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": "..",
+		"baseUrl": ".",
+		"paths": {
+			"pkg-a": ["../pkg-a/index"],
+			"pkg-b": ["../pkg-b/index"],
+			"pkg-engine-api": ["../pkg-engine-api/index"]
+		}
+	},
+	"include": [
+		"./**/*.ts",
+		"../pkg-a/**/*.ts",
+		"../pkg-b/**/*.ts",
+		"../pkg-engine-api/**/*.d.ts"
+	],
+	"tstl": {
+		"luaTarget": "5.3",
+		"luaBundle": "../../dist/bundle.lua",
+		"luaBundleEntry": "./main.ts",
+		"luaLibImport": "require",
+		"sourceMapTraceback": true,
+		"noResolvePaths": ["pkg-engine-api"]
+	}
 }

@@ -1,4 +1,4 @@
-export { createUnit, statusText } from "./units/unit";
-export type { Unit } from "./units/unit";
-export { createHero, gainXp, heroStatus, heroDistance } from "./units/hero";
 export type { Hero } from "./units/hero";
+export { createHero, gainXp, heroDistance, heroStatus } from "./units/hero";
+export type { Unit } from "./units/unit";
+export { createUnit, statusText } from "./units/unit";

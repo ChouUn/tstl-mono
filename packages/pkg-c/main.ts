@@ -1,5 +1,5 @@
-import { vec2, distance, log, formatPercent } from "pkg-a";
-import { createHero, gainXp, heroStatus, heroDistance } from "pkg-b";
+import { formatPercent, log } from "pkg-a";
+import { createHero, gainXp, heroDistance, heroStatus } from "pkg-b";
 import * as engineModule from "pkg-engine-api";
 
 const arthas = createHero("Arthas", 0, 0);

@@ -1,8 +1,8 @@
 {
-  "name": "e2e-engine-api",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "run": "lua ./run-e2e.lua"
-  }
+	"name": "e2e-engine-api",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"run": "lua ./run-e2e.lua"
+	}
 }
