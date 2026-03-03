@@ -1,8 +1,8 @@
 import { transpileAndExecute } from "test-utils/src/lua-exec";
 import { describe, expect, it } from "vitest";
 
-// Inline the clamp source as a TS string for transpileString.
-// This avoids needing tsconfig paths/includes — simplest approach for a spike.
+// Inline clamp source as TS string for the spike helper.
+// Keep this test independent from package tsconfig path/include details.
 const CLAMP_TS = `
 export function clamp(value: number, min: number, max: number): number {
 	return math.max(min, math.min(max, value));

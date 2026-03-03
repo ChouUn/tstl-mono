@@ -178,7 +178,7 @@ packages/
 
 ### 5.2 Spike 结果
 
-**状态：通过**。全链路 `TS → TSTL transpileString → Lua WASM 执行 → 断言` 验证成功。
+**状态：通过**。全链路 `TS → TSTL transpileFiles → Lua WASM 执行 → 断言` 验证成功。
 
 **踩坑记录**：
 

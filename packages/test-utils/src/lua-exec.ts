@@ -2,46 +2,17 @@
  * Test helper: TypeScript → TSTL → Lua 5.3 WASM execution pipeline.
  *
  * Workflow:
- *   1. transpileString() compiles TypeScript source to Lua via TSTL
- *   2. The generated Lua is wrapped to expose the module exports
- *   3. A Lua 5.3 WASM VM (lua-wasm-bindings) executes the code
- *   4. The result is read from the Lua stack and returned to Node.js
- *
- * This mirrors the pattern used by TSTL's own test suite (test/util.ts),
- * adapted for our monorepo's unit testing needs.
+ *   1. Write TS code to a temp file under `.temp/`
+ *   2. Use transpileFiles() with `types: ["lua-types/5.3"]`
+ *   3. Execute generated Lua in lua-wasm-bindings
+ *   4. Return the numeric result to Vitest
  */
 
+import { mkdirSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { LUA_OK } from "lua-wasm-bindings/dist/lua";
 import { lauxlib, lua, lualib } from "lua-wasm-bindings/dist/lua.53";
-import { transpileString } from "typescript-to-lua";
-
-// Minimal Lua global declarations for transpileString.
-//
-// Why not use `types: ["lua-types/5.3"]`?
-//   transpileString creates a virtual TS program whose file resolver cannot
-//   follow pnpm symlinks to find node_modules type packages.
-//
-// Why not use `lib: ["lib.esnext.d.ts"]` + Math.sqrt() (TSTL's own test style)?
-//   TSTL's tests write JS-style APIs (Math.sqrt) and rely on builtin transformers
-//   to auto-map them to Lua (math.sqrt). That works, but our source code uses
-//   Lua-native APIs (math.sqrt via lua-types), so test code should match source.
-//
-// So we inline declare statements — lightweight, no dependencies, and test code
-// mirrors the actual source code that uses lua-types/5.3.
-const LUA_GLOBALS_PREAMBLE = `
-declare namespace math {
-	function max(...args: number[]): number;
-	function min(...args: number[]): number;
-	function sqrt(x: number): number;
-	function floor(x: number): number;
-	function ceil(x: number): number;
-	function abs(x: number): number;
-}
-declare namespace string {
-	function format(fmt: string, ...args: unknown[]): string;
-}
-declare function print(...args: unknown[]): void;
-`;
+import { transpileFiles } from "typescript-to-lua";
 
 export interface ExecOptions {
 	/** TypeScript source code to transpile (e.g. an exported function) */
@@ -67,21 +38,28 @@ export function transpileAndExecute({
 }: ExecOptions): number {
 	// --- Step 1: Transpile TS → Lua ---
 	//
-	// transpileString options rationale:
-	// - luaTarget "5.3": match our project target (Warcraft III / Lua 5.3)
-	// - noImplicitSelf: strip TSTL's default `self` parameter so Lua calls
-	//   are straightforward: `exports.clamp(5, 0, 10)` not `exports.clamp(nil, 5, 0, 10)`
-	// - luaLibImport "inline": transpileString operates on a single string with
-	//   no file system context, so `require("lualib_bundle")` would fail at runtime.
-	//   "inline" embeds any needed TSTL runtime helpers directly in the output.
-	//   For pure math.* calls, no helpers are needed so zero overhead.
-	// - noHeader: skip the "Generated with TSTL" comment
-	const result = transpileString(LUA_GLOBALS_PREAMBLE + tsCode, {
-		luaTarget: "5.3" as never,
-		noImplicitSelf: true,
-		luaLibImport: "inline" as never,
-		noHeader: true,
-	});
+	// Use transpileFiles so TypeScript resolves lua-types from node_modules normally.
+	const tempDir = resolve(".temp", "tstl-test-utils");
+	mkdirSync(tempDir, { recursive: true });
+	const tempMainFile = resolve(tempDir, "main.ts");
+	writeFileSync(tempMainFile, tsCode, "utf8");
+
+	let luaCode: string | undefined;
+	const result = transpileFiles(
+		[tempMainFile],
+		{
+			luaTarget: "5.3" as never,
+			noImplicitSelf: true,
+			luaLibImport: "inline" as never,
+			noHeader: true,
+			types: ["lua-types/5.3"],
+		},
+		(fileName, data) => {
+			if (fileName.endsWith(".lua")) {
+				luaCode = data;
+			}
+		},
+	);
 
 	const errors = result.diagnostics.filter((d) => d.category === 1);
 	if (errors.length > 0) {
@@ -93,14 +71,14 @@ export function transpileAndExecute({
 		throw new Error(`TSTL transpilation failed:\n${messages.join("\n")}`);
 	}
 
-	const luaCode = result.file?.lua;
+	// transpileFiles emits via writeFile callback, so capture the generated main Lua there.
 	if (!luaCode) {
 		throw new Error("TSTL produced no Lua output");
 	}
 
 	// --- Step 2: Execute in Lua 5.3 WASM VM ---
 	//
-	// transpileString generates module-style Lua:
+	// transpileFiles generates module-style Lua:
 	//   local ____exports = {}
 	//   function ____exports.clamp(value, min, max) ... end
 	//   return ____exports
