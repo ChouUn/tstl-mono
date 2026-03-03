@@ -1,0 +1,15 @@
+// This tsconfig does NOT extend tsconfig.base.json.
+// Reason: base injects "types": ["lua-types/5.3"] which adds Lua globals
+// (math, print, string, etc.) that conflict with the Node.js/Vitest
+// runtime environment where test-utils code actually executes.
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true
+	},
+	"include": ["src/**/*.ts"]
+}

@@ -6,14 +6,17 @@
 		"check": "biome check",
 		"format": "biome format --write",
 		"lint": "biome lint",
-		"e2e:engine-api": "pnpm --filter e2e-engine-api run run"
+		"e2e:engine-api": "pnpm --filter e2e-engine-api run run",
+		"test": "vitest run"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.5",
 		"lua-types": "^2.13.1",
+		"lua-wasm-bindings": "^0.5.3",
 		"simple-git-hooks": "^2.13.1",
 		"typescript": "~5.9.0",
-		"typescript-to-lua": "^1.33.2"
+		"typescript-to-lua": "^1.33.2",
+		"vitest": "^4.0.18"
 	},
 	"simple-git-hooks": {
 		"pre-commit": "pnpm exec biome check --staged --no-errors-on-unmatched"

@@ -15,6 +15,7 @@
 		"../pkg-b/**/*.ts",
 		"../pkg-engine-api/**/*.d.ts"
 	],
+	"exclude": ["../**/__tests__/**"],
 	"tstl": {
 		"luaTarget": "5.3",
 		"luaBundle": "../../dist/bundle.lua",

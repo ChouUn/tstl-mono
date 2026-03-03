@@ -11,9 +11,11 @@ tstl-mono/
 │   ├── pkg-b/              # 单位系统（依赖 pkg-a）
 │   ├── pkg-c/              # 主入口（依赖 pkg-a + pkg-b + pkg-engine-api，luaBundle 打包）
 │   ├── pkg-engine-api/     # 引擎 API 类型声明（纯 .d.ts，Global + Module 双模型）
-│   └── e2e-engine-api/     # 引擎 API 的 E2E 测试（Lua stubs）
+│   ├── e2e-engine-api/     # 引擎 API 的 E2E 测试（Lua stubs）
+│   └── test-utils/         # 共享测试工具（transpile + Lua WASM execute）
 ├── docs/                   # 项目文档
 ├── biome.json              # Biome 代码质量配置
+├── vitest.config.ts        # Vitest 测试配置
 ├── tsconfig.base.json      # 共享编译选项
 └── pnpm-workspace.yaml
 ```
@@ -46,6 +48,15 @@ pnpm lint             # Biome: 仅 lint
 
 - [Biome 2.x](https://biomejs.dev/) 统一处理格式化、lint 和 import 排序
 - [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks) 在每次 commit 前自动运行 `biome check --staged`
+
+## 测试
+
+```bash
+pnpm test             # Vitest: 运行所有单元测试
+```
+
+- [Vitest 4.x](https://vitest.dev/) + [lua-wasm-bindings](https://github.com/TypeScriptToLua/lua-wasm-bindings) — 通过 TSTL 编译 TS，在 Lua 5.3 WASM VM 中执行编译产物并断言结果
+- 测试位于各包的 `__tests__/` 目录（Vue/Babel 模式）
 
 ## 关键设计
 

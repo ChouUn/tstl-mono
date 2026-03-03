@@ -24,6 +24,17 @@ pnpm lint             # Biome: lint only
 - **Biome 2.x** handles formatting, linting, and import sorting via `biome.json`
 - **simple-git-hooks** runs `biome check --staged` on every commit (pre-commit hook)
 
+## Testing
+
+```bash
+pnpm test             # Vitest: run all unit tests
+```
+
+- **Vitest 4.x** + **lua-wasm-bindings** — transpiles TS via TSTL, executes compiled Lua in a Lua 5.3 WASM VM, asserts results in Node.js
+- **test-utils** package (`packages/test-utils/`) provides the shared transpile + execute helper
+- Tests live in each package's `__tests__/` directory (Vue/Babel pattern)
+- pkg-c's tsconfig excludes `__tests__/` via `"exclude": ["../**/__tests__/**"]`
+
 ## Architecture
 
 This is a TSTL (TypeScriptToLua) monorepo demo targeting Lua 5.3 (Warcraft III). Five packages managed by pnpm workspace:
