@@ -1,7 +1,11 @@
 {
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
-		"noEmit": true
+		"noEmit": true,
+		"baseUrl": ".",
+		"paths": {
+			"test-utils/*": ["../test-utils/*"]
+		}
 	},
 	"include": ["./**/*.ts"]
 }

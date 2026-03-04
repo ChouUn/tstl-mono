@@ -54,6 +54,8 @@ importers:
 
   packages/pkg-engine-api: {}
 
+  packages/test-utils: {}
+
 packages:
 
   '@biomejs/biome@2.4.5':
